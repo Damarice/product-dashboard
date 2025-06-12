@@ -2,27 +2,12 @@
 
 import { Product } from "@/types/product";
 import { Fragment, useState } from "react";
-import { gql, useMutation } from "@apollo/client";
 
 interface ShopActionProps {
   selectedProduct: Product;
   toast: any;
 }
-const ADD_TO_CART = gql`
-  mutation Mutation($product: ID!, $quantity: Int!, $color: String) {
-    createCart(product: $product, quantity: $quantity, color: $color) {
-      id
-    }
-  }
-`;
 
-const ADD_TO_WISHLIST = gql`
-  mutation CreateWishList($product: ID!) {
-    createWishList(product: $product) {
-      id
-    }
-  }
-`;
 
 export default function ShopAction({
   selectedProduct,
@@ -31,67 +16,11 @@ export default function ShopAction({
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState(selectedProduct.rating);
   const [isLoading, setIsLoading] = useState(false);
-  const [addToCart] = useMutation(ADD_TO_CART);
-  const [addToWishList] = useMutation(ADD_TO_WISHLIST);
-
-  const handleAddToCart = () => {
-    const id = toast.loading("Adding to cart...");
-    setIsLoading(true);
-    addToCart({
-      variables: {
-        product: selectedProduct.id,
-        quantity: quantity,
-        color: color,
-      },
-      onCompleted: () => {
-        toast.update(id, {
-          render: "Added to cart!",
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
-        });
-        setIsLoading(false);
-      },
-      onError: () => {
-        toast.update(id, {
-          render: "Failed to add to cart!",
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
-        setIsLoading(false);
-      },
+  const submit = () => {
+    toast("You need to be logged in to add to cart!", {
+      type: "error",
     });
-  };
-
-  const handleAddToWishList = () => {
-    if (isLoading) return; // Prevent multiple clicks while loading
-    const id = toast.loading("Adding to wishlist...");
-    setIsLoading(true);
-    addToWishList({
-      variables: {
-        product: selectedProduct.id,
-      },
-      onCompleted: () => {
-        toast.update(id, {
-          render: "Added to wishlist!",
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
-        });
-        setIsLoading(false);
-      },
-      onError: () => {
-        toast.update(id, {
-          render: "Failed to add to wishlist!",
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
-        setIsLoading(false);
-      },
-    });
-  };
+  }
 
   return (
     <Fragment>
@@ -133,7 +62,7 @@ export default function ShopAction({
       <div className="flex space-x-4 mb-6">
         <button
           className="bg-black flex gap-2 items-center text-white dark:text-gray-100 px-6 py-2 rounded-md hover:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          onClick={handleAddToCart}
+          onClick={submit }
           disabled={isLoading}
         >
           <svg
@@ -154,7 +83,7 @@ export default function ShopAction({
         </button>
         <button
           className="bg-gray-200 dark:bg-gray-700 flex gap-2 items-center  text-gray-800  dark:text-gray-100 px-6 py-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-gray-800 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
-          onClick={handleAddToWishList}
+          onClick={ submit}
           disabled={isLoading}
         >
           <svg

@@ -22,30 +22,47 @@ export default function CategoryFilterList({
 
   return (
     <div className="card">
-      <div className="card-heading">
-        <a
-          data-toggle="collapse"
-          data-target="#collapseOne"
-          onClick={handleToggle}
-        >
+      <a
+        className=" dark:text-white dark:bg-gray-900 dark:border-gray-700  px-2 py-2 flex justify-between"
+        data-toggle="collapse"
+        data-target="#collapseOne"
+        onClick={handleToggle}
+      >
+        <div className="dark:text-white dark:bg-gray-900 dark:border-gray-700 ">
           {name}
-        </a>
-      </div>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m19.5 8.25-7.5 7.5-7.5-7.5"
+          />
+        </svg>
+      </a>
       <div
         id="collapseOne"
-        className={` ${active ? "visible" : " collapse"}`}
+        className={` ${
+          active ? "visible" : " collapse"
+        } dark:text-white dark:bg-gray-900 dark:border-gray-700 `}
         data-parent="#accordionExample"
       >
         <div className="card-body ">
-          <div className="shop__sidebar__categories ">
-            <ul className=" overflow-auto">
+          <div className=" dark:text-white dark:bg-gray-900 dark:border-gray-700 ">
+            <ul className=" overflow-auto dark:text-white dark:bg-gray-900  ">
               {items.map((item, index) => (
                 <li key={item.id}>
                   <a
                     onClick={() => {
                       handleFilterByCategory(item.category_name);
                     }}
-                    className="text-black "
+                    className="dark:text-white dark:bg-gray-900 dark:border-gray-700 capitalize"
                   >
                     {item.category_name}
                   </a>

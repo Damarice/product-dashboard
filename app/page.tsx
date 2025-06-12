@@ -1,19 +1,12 @@
 //shop
 // import Topbar from "@/components/topbar";
 
-import ShopFilters from "@/components/shop/shopFilters";
-import UploadButton from "@/components/shop/uploadButton";
-import Image from "next/image";
-import { Fragment, Suspense } from "react";
-import { gql } from "@apollo/client";
-import { getClient } from "@/lib/client";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShopPage from "@/components/shop/shopPage";
-import Loading from "@/components/loading";
-import ErrorComponent from "@/components/error";
 import { Category } from "@/types/product";
 import type { Metadata } from "next";
+import { Fragment } from "react";
 
 export const metadata: Metadata = {
   title: "Products",
@@ -90,9 +83,9 @@ export default async function Shop() {
       {/* Shop Section Begin */}
       <section className="mt-4 dark:text-white dark:bg-gray-800">
 
-        <Suspense fallback={<Loading />}>
+
           <ShopPage categories={categories} />
-        </Suspense>
+       
       </section>
       {/* Shop Section End */}
     </Fragment>

@@ -1,8 +1,5 @@
-import { decodeMaskedId } from "@/utils/encryption";
-import Image from "next/image";
-import Link from "next/link";
+
 import { Fragment, Suspense } from "react";
-import { getClient } from "@/lib/client";
 import ImageTabs from "@/components/shop/imageTabs";
 import ImageTabsSSR from "@/components/shop/ImageTabsSSR";
 import ProductDetail from "@/components/shop/productDetail";
@@ -61,9 +58,8 @@ export default async function ProductDetails({ params }: { params: { slug: strin
 
         <div className="container mx-auto px-2 py-8">
           <div className="flex flex-wrap -mx-4">
-            <Suspense fallback={<ImageTabsSSR image_url={selectedProduct?.images} />}>
               <ImageTabs image_url={selectedProduct?.images} />
-            </Suspense>
+        
 
             <div className="w-full md:w-1/2 px-4">
               <h2 className="text-3xl font-bold mb-2 dark:text-white">{selectedProduct?.title}</h2>
@@ -103,10 +99,9 @@ export default async function ProductDetails({ params }: { params: { slug: strin
                 <span className="ml-2 text-gray-600 dark:text-gray-400">{selectedProduct?.rating?.toFixed(2)}</span>
               </div>
 
-              <Suspense fallback={<div>Loading actions...</div>}>
+           
                 <ShopAction selectedProduct={selectedProduct} toast={toast} />
-              </Suspense>
-
+             
               <h3 className="text-xl font-semibold mb-2 mt-6 dark:text-white">Description:</h3>
               <div
                 className="text-gray-700 dark:text-gray-400 mb-6 w-full important-font mt-2"

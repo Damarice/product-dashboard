@@ -1,15 +1,12 @@
 "use client";
 import { Fragment, useState } from "react";
-import { useMutation, gql } from "@apollo/client";
+
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
 import {
   ShoppingBagIcon,
-  UserGroupIcon,
-  NewspaperIcon,
-  EnvelopeIcon,
 } from "@heroicons/react/24/outline";
 const navigation = [
   // { name: "Product", href: "#" },
@@ -31,11 +28,7 @@ const navigation = [
   // },
 ];
 
-const LOGOUT = gql`
-  mutation Mutation {
-    logout
-  }
-`;
+
 
 interface MobileTopBarProps {
   toast: any;
@@ -45,60 +38,8 @@ export default function MobileTopBar({
   toast,
 }: MobileTopBarProps): JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [logout] = useMutation(LOGOUT);
-  const handleLogout = () => {
-    const id = toast.loading("Please wait...");
-    setIsLoading(true);
-    try {
-      logout({
-        onCompleted: (infoData) => {
-          localStorage.clear();
-          toast.update(id, {
-            render: "Logout Successfully!",
-            type: "success",
-            isLoading: false,
-            autoClose: 5000,
-          });
+  
 
-          // force reload the page and redirect to the home page
-
-          setIsLoading(false);
-          setMobileMenuOpen(false);
-          window.location.reload();
-        },
-        onError: ({ graphQLErrors, networkError }) => {
-          setIsLoading(false);
-
-          if (graphQLErrors) {
-            graphQLErrors.forEach(({ message, locations, path }) => {
-              toast.update(id, {
-                render: message,
-                type: "error",
-                isLoading: false,
-                autoClose: 5000,
-              });
-            });
-          }
-          if (networkError) {
-            toast.update(id, {
-              render: networkError.message,
-              type: "error",
-              isLoading: false,
-              autoClose: 5000,
-            });
-          }
-        },
-      });
-    } catch (e) {
-      toast.update(id, {
-        render: `Something went wrong!`,
-        type: "error",
-        isLoading: false,
-        autoClose: 5000,
-      });
-    }
-  };
   return (
     <Fragment>
       <div className="canvas__open">

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
 const nextConfig = async (phase, { defaultConfig }) => {
-  if (phase === PHASE_DEVELOPMENT_SERVER) {
+  
     return {
       env: {
         API_URL: "https://dummyjson.com",
@@ -19,7 +19,7 @@ const nextConfig = async (phase, { defaultConfig }) => {
         ],
       },
     };
-  }
+  
 };
 
 export default nextConfig;

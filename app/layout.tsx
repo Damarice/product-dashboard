@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "@/components/footer";
 import Topbar from "@/components/topbar";
-import { ApolloWrapper } from "@/lib/ApolloWrapper";
 import ToggleDarkMode from "@/components/darkmode";
 
 const geistSans = localFont({
@@ -86,12 +85,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-black dark:bg-black dark:text-white transition-colors`}
       >
-        <ApolloWrapper>
           <Topbar />
-          <ToggleDarkMode />
+          {/* <ToggleDarkMode /> */}
           {children}
           <Footer />
-        </ApolloWrapper>
         {/* <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.nice-select.min.js"></script>
