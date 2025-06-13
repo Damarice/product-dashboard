@@ -1,7 +1,7 @@
 //shop
 // import Topbar from "@/components/topbar";
 
-import { Fragment } from "react";
+import { Fragment } from "react";;
 
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -42,6 +42,7 @@ const hardcodedCategories: Category[] = [
   },
 ];
 export default async function Shop() {
+
   const categories: Category[] = hardcodedCategories;
   return (
     
