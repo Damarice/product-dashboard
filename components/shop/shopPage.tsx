@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Category, Product } from "@/types/product";
 import ShopFilters from "./shopFilters";
 import ProductDetail from "./productDetail";
+import Loading from "../loading";
 
 interface ShopPageProps {
   categories: Category[];
@@ -16,6 +17,7 @@ export default function ShopPage({ categories }: ShopPageProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const limit = 12;
 
@@ -25,6 +27,7 @@ export default function ShopPage({ categories }: ShopPageProps) {
     const limit = 12;
     const skip = (page - 1) * limit;
 
+    setLoading(true);
     try {
       let res;
 
@@ -50,6 +53,8 @@ export default function ShopPage({ categories }: ShopPageProps) {
       }
     } catch (error) {
       console.error("Failed to fetch products:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -158,23 +163,30 @@ export default function ShopPage({ categories }: ShopPageProps) {
         />
 
         <div className="col-lg-9">
-          <div>
-            <p className="text-gray-700 dark:text-gray-400">
-              Showing {offset + 1}–{Math.min(offset + limit, totalProducts)} of{" "}
-              {totalProducts} results
-            </p>
-          </div>
-          <div className="row dark:text-white  ">
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((product) => (
-                <ProductDetail key={product.id} product={product} />
-              ))
-            ) : (
-              <p className="text-gray-700 dark:text-gray-400">
-                No products found.
-              </p>
-            )}
-          </div>
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              <div>
+                <p className="text-gray-700 dark:text-gray-400">
+                  Showing {offset + 1}–{Math.min(offset + limit, totalProducts)}{" "}
+                  of {totalProducts} results
+                </p>
+              </div>
+
+              <div className="row dark:text-white  ">
+                {filteredProducts.length > 0 ? (
+                  filteredProducts.map((product) => (
+                    <ProductDetail key={product.id} product={product} />
+                  ))
+                ) : (
+                  <p className="text-gray-700 dark:text-gray-400">
+                    No products found.
+                  </p>
+                )}
+              </div>
+            </>
+          )}
           <div className="product__pagination flex justify-center mt-4">
             {renderPaginationButtons()}
           </div>

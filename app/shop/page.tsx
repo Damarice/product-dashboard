@@ -1,19 +1,19 @@
 //shop
 // import Topbar from "@/components/topbar";
 
-import { Fragment } from "react";;
+import { Fragment, Suspense } from "react";
 
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShopPage from "@/components/shop/shopPage";
 import { Category } from "@/types/product";
 import type { Metadata } from "next";
+import Loading from "@/components/loading";
 
 export const metadata: Metadata = {
   title: "Products",
   description: "Explore our wide range of products",
 };
-
 
 const hardcodedCategories: Category[] = [
   {
@@ -42,10 +42,8 @@ const hardcodedCategories: Category[] = [
   },
 ];
 export default async function Shop() {
-
   const categories: Category[] = hardcodedCategories;
   return (
-    
     <Fragment>
       <ToastContainer
         position="top-right"
@@ -77,10 +75,7 @@ export default async function Shop() {
       {/* Breadcrumb Section End */}
       {/* Shop Section Begin */}
       <section className="dark:text-white dark:bg-gray-800 dark:border-gray-700  py-4">
-
-     
-          <ShopPage categories={categories} />
-       
+        <ShopPage categories={categories} />
       </section>
       {/* Shop Section End */}
     </Fragment>
