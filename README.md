@@ -2,7 +2,7 @@
 ```markdown
 # 🛍️ Product Dashboard - Frontend Developer Assessment
 
-A modern, responsive product dashboard built with **Next.js (App Router)**, **Tailwind CSS**, **TypeScript**, and **React Query**. This project showcases clean architecture, component-based design, and practical frontend engineering using a public product API.
+A modern, responsive product dashboard built with **Next.js (App Router)**, **Tailwind CSS**, **TypeScript**, and **React Query**. This project allows users to browse, search, and filter products from a public API. It also supports a user-friendly **dark mode toggle** for an enhanced visual experience.
 
 ---
 
@@ -18,23 +18,25 @@ A modern, responsive product dashboard built with **Next.js (App Router)**, **Ta
 
 ## 📦 Features
 
-- **Product Listing Page**  
+- **🛍️ Product Listing Page**  
   - Displays products in a responsive grid layout  
   - Each card includes product image, title, price, and rating
 
-- **Search & Filter**  
+- **🔍 Search & Filter**  
   - Real-time search by product title  
-  - Category-based filtering using a dropdown
+  - Category filtering using a dropdown
 
-- **Product Details Page**  
-  - Dynamic routing to show more info about each product  
+- **📄 Product Details Page**  
+  - Dynamic routing to display detailed product information  
   - Uses `/products/:id` endpoint
 
-- **User Experience Enhancements**  
-  - Loading skeletons and spinners  
-  - Error handling with helpful messages
+- **💡 Dark Mode**  
+  - Toggle between light and dark themes  
+  - Preference persists across sessions
 
-- **Optional**: Dark mode toggle (can be added as an enhancement)
+- **⏳ Loading & Error States**  
+  - Skeleton loaders/spinners during fetch  
+  - Meaningful error messages on failure
 
 ---
 
@@ -43,8 +45,8 @@ A modern, responsive product dashboard built with **Next.js (App Router)**, **Ta
 ```
 
 /app
-├── layout.tsx             # App-wide layout wrapper
-├── page.tsx               # Product listing page
+├── layout.tsx             # Shared layout and dark mode context
+├── page.tsx               # Main product listing page
 └── product/
 └── \[id]/page.tsx      # Dynamic route for product details
 
@@ -53,13 +55,17 @@ A modern, responsive product dashboard built with **Next.js (App Router)**, **Ta
 ├── ProductCard.tsx
 ├── ProductGrid.tsx
 ├── SearchBar.tsx
-└── CategoryFilter.tsx
+├── CategoryFilter.tsx
+└── DarkModeToggle.tsx     # UI switch for theme toggle
 
 /hooks
-└── useProducts.ts         # Custom hook for data fetching
+└── useProducts.ts         # Custom hook using React Query
+
+/context
+└── ThemeContext.tsx       # Dark mode state management
 
 /styles
-└── globals.css            # Tailwind and global styles
+└── globals.css            # Tailwind & global styles
 
 ````
 
@@ -80,28 +86,27 @@ cd product-dashboard
 npm install
 ```
 
-3. **Run the Development Server**
+3. **Start the Development Server**
 
 ```bash
 npm run dev
 ```
 
-4. Open `http://localhost:3000` in your browser to see the dashboard.
+4. Open `http://localhost:3000` in your browser to view the dashboard.
 
 ---
 
 ## 🧠 Architecture & Design Decisions
 
-* **Modular Design**: UI is broken into atomic reusable components.
-* **React Query**: Used for efficient data fetching with built-in caching, loading, and error states.
-* **Client-Side Filtering**: Search and category filters run on the client for immediate feedback.
-* **Responsive Design**: Tailwind CSS utility classes used for mobile-first responsiveness.
+* **Dark Mode**: Managed using React context and Tailwind's `dark:` utility classes with `class` strategy.
+* **Component-Based Architecture**: Each UI section is modular and reusable.
+* **React Query**: Chosen for its powerful caching, loading, and error management.
+* **Tailwind CSS**: Used for consistent, scalable, and responsive design.
 
 ---
 
-## 📌 Improvements & Future Enhancements
+## 📌 Future Enhancements
 
-* Add pagination or infinite scroll
-* Implement dark mode toggle with persisted theme
-* Add accessibility improvements (ARIA, keyboard support)
-* Write unit tests for components and hooks
+* Add pagination or infinite scroll for product list
+* Implement accessibility improvements (ARIA roles, keyboard navigation)
+* Add unit and integration tests
