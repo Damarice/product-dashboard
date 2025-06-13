@@ -1,6 +1,5 @@
 import { Fragment, Suspense } from "react";
 import ImageTabs from "@/components/shop/imageTabs";
-import ImageTabsSSR from "@/components/shop/ImageTabsSSR";
 import ProductDetail from "@/components/shop/productDetail";
 import { Product } from "@/types/product";
 import { Bounce, ToastContainer, toast } from "react-toastify";

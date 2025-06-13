@@ -1,12 +1,14 @@
 //shop
 // import Topbar from "@/components/topbar";
 
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import { Fragment, Suspense } from "react";
+
+import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShopPage from "@/components/shop/shopPage";
 import { Category } from "@/types/product";
 import type { Metadata } from "next";
-import { Fragment } from "react";
+import Loading from "@/components/loading";
 
 export const metadata: Metadata = {
   title: "Products",
@@ -39,18 +41,9 @@ const hardcodedCategories: Category[] = [
     updated_at: "2024-01-01T00:00:00Z",
   },
 ];
-
 export default async function Shop() {
   const categories: Category[] = hardcodedCategories;
   return (
-    // const response = await fetch('https://dummyjson.com/products?limit=4');
-    //   const data = await response.json();
-    //   const products = data.products;
-    //   console.log(products, 'products');
-    
-      
-    //   return <main>Products will be displayed here {products.map((product: Product) => <ProductCard key={product.id} imageUrl={product.images[0]} title={product.title} ratingCount={product.rating} price={product.price} />)}</main>;
-    
     <Fragment>
       <ToastContainer
         position="top-right"
@@ -63,11 +56,11 @@ export default async function Shop() {
         transition={Bounce}
       />
       {/* Breadcrumb Section Begin */}
-      <section className="breadcrumb-option">
+      <section className="breadcrumb-option dark:text-white dark:bg-gray-600">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <div className="breadcrumb__text">
+              <div className="breadcrumb__text ">
                 <h4>Shop</h4>
                 <div className="breadcrumb__links">
                   <a href="/">Home</a>
@@ -81,11 +74,8 @@ export default async function Shop() {
 
       {/* Breadcrumb Section End */}
       {/* Shop Section Begin */}
-      <section className="mt-4 dark:text-white dark:bg-gray-800">
-
-
-          <ShopPage categories={categories} />
-       
+      <section className="dark:text-white dark:bg-gray-800 dark:border-gray-700  py-4">
+        <ShopPage categories={categories} />
       </section>
       {/* Shop Section End */}
     </Fragment>

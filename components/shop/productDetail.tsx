@@ -7,13 +7,8 @@ interface ProductDetailProps {
 }
 
 export default function ProductDetail({ product }: ProductDetailProps) {
-
-
   return (
-    <Link
-      className="col-lg-4 col-md-6 col-sm-6 "
-      href={`/shop/${product.id}`}
-    >
+    <Link className="col-lg-4 col-md-6 col-sm-6 " href={`/shop/${product.id}`}>
       <div className="product__item h-[420px] flex flex-col justify-between bg-gray-50  dark:text-white dark:bg-gray-900 dark:border-gray-700 dark:hover:cursor-pointer p-2 rounded-xl">
         <Image
           src={product.images[0]}

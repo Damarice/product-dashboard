@@ -1,7 +1,5 @@
 "use client";
 import { useState } from "react";
-import ImageTab from "./imageTab";
-import ImageTabItem from "./ImageTabItem";
 import Image from "next/image";
 
 interface ImageTabsProps {

@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import FilterList from "./filterList";
 import { Category } from "@/types/product";
 import CategoryFilterList from "./categoryFilterList";
 import { Product } from "@/types/product";
@@ -54,9 +53,6 @@ export default function ShopFilters({
               items={categories}
               handleFilterByCategory={handleFilterByCategory}
             />
-            {/* {list.map((item) => (
-              <FilterList key={item.id} {...item} />
-            ))} */}
           </div>
         </div>
       </div>
